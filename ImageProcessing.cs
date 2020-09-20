@@ -14,6 +14,7 @@ namespace AOCI_1
         public Image<Bgr, byte> sourceImage;
         public VideoCapture capture;
         public event EventHandler<ImageEventArgs> ImageProcessed;
+        int frameCounter = 0;
 
         public class ImageEventArgs : EventArgs
         {
@@ -71,6 +72,17 @@ namespace AOCI_1
             capture = new VideoCapture();
             capture.ImageGrabbed += ProcessFrame;
             capture.Start();
+        }
+
+        public Image<Bgr, byte> timerVideo()
+        {
+            var frame = capture.QueryFrame();
+            
+            sourceImage = frame.ToImage<Bgr, byte>();
+            var videoImage = Processing();
+
+            frameCounter++;
+            return videoImage;
         }
 
         public void VideoProcessing(string fileName)

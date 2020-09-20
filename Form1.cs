@@ -66,28 +66,16 @@ namespace AOCI_1
 
                 resultImage.VideoProcessing(fileName);
 
-                //capture = new VideoCapture(fileName);
                 timer1.Enabled = true;
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            var frame = resultImage.capture.QueryFrame();
-
-            Image<Bgr, byte> videoImage = frame.ToImage<Bgr, byte>();
-
-            imageBox2.Image = videoImage;
-
-            frameCounter++;
+            imageBox2.Image = resultImage.timerVideo();
 
             if (frameCounter >= resultImage.capture.GetCaptureProperty(CapProp.FrameCount))
                 timer1.Enabled = false;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -118,6 +106,16 @@ namespace AOCI_1
         {
             resultImage.cannyThresholdLinking = trackBar5.Value;
             imageBox2.Image = resultImage.Processing();
+        }
+
+        private void imageBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
