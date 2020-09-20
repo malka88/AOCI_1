@@ -78,8 +78,8 @@ namespace AOCI_1
         {
             var frame = capture.QueryFrame();
             
-            sourceImage = frame.ToImage<Bgr, byte>();
-            var videoImage = Processing();
+            sourceImage = frame.ToImage<Bgr, byte>(); //обрабатываемое изображение из функции Processing приравниваем к фрейму
+            var videoImage = Processing(); //на финальное изображение накладываем фильтр, вызывая функцию
 
             frameCounter++;
             return videoImage;
@@ -87,7 +87,7 @@ namespace AOCI_1
 
         public void VideoProcessing(string fileName)
         {
-            capture = new VideoCapture(fileName);
+            capture = new VideoCapture(fileName); //берем кадры из видео
         }
 
         private void ProcessFrame(object sender, EventArgs e)
